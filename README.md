@@ -1,11 +1,8 @@
 <div align="center">
 
 # LupiStore
-
-![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success?style=for-the-badge&logo=github)
-![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.14-blue?style=for-the-badge&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
-![Windows](https://img.shields.io/badge/Windows-User%20Mode-0078D6?style=for-the-badge&logo=windows11&logoColor=white)
 
 </div>
 
