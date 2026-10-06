@@ -13,7 +13,7 @@
 
 LupiStore its an store for running OSS apps:
 
-## 📦 Current catalog:
+## Current catalog:
 
 ### Dolphin Emulator
 
