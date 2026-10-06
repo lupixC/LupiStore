@@ -66,7 +66,4 @@ Contact me and tell me what app do you want to add, we have some rules too.
 
 <div align="center">
 
-![GitHub](https://img.shields.io/badge/Built%20for-GitHub-181717?style=flat-square&logo=github)
-![OSS](https://img.shields.io/badge/OSS-❤️-brightgreen?style=flat-square)
-
 </div>
