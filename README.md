@@ -12,12 +12,13 @@ LupiStore its an store for running OSS apps:
 
 ## Current catalog:
 
-### Dolphin Emulator (we are so closeeeeee to making it working)
-
+### Dolphin Emulator
+*(IT WORKS!)*
 ### LupiLauncher
-*(Minecraft java Launcher)*
+*(Minecraft java Launcher, it Works)*
 
-### Osu!Lazer (doesnt work)
+### Osu!Lazer
+*(Still in development)*
 
 ---
 
