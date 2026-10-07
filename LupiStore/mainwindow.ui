@@ -3,7 +3,7 @@
  <class>Form</class>
  <widget class="QWidget" name="Form">
   <property name="geometry"><rect><x>0</x><y>0</y><width>900</width><height>650</height></rect></property>
-  <property name="windowTitle"><string>Form</string></property>
+  <property name="windowTitle"><string>LupiStore</string></property>
   <property name="styleSheet"><string>background-color: #94f0a6;</string></property>
  <widget class="QPushButton" name="dolphinButton">
   <property name="geometry"><rect><x>40</x><y>220</y><width>230</width><height>230</height></rect></property>
@@ -112,7 +112,7 @@
   <property name="iconSize"><size><width>24</width><height>24</height></size></property>
  </widget>
  <widget class="QLabel" name="image3">
-  <property name="geometry"><rect><x>340</x><y>80</y><width>190</width><height>160</height></rect></property>
+  <property name="geometry"><rect><x>320</x><y>90</y><width>190</width><height>160</height></rect></property>
   <property name="enabled">
    <bool>true</bool>
   </property>
