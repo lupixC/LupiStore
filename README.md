@@ -45,7 +45,7 @@ Contact me and tell me what app do you want to add, we have some rules too.
 
 ###  Q: Is this installing apps in my system?
 
-> A: No, it downloads them, after that it runs the .py (Python file), in the case of Dolphin Emu and Osu it loads a .pyd (Python Dynamic Module) that its similar to a .dll (Dynamic Link Library)
+> A: No, it downloads them, after that it runs the .py (Python file), in the case of Dolphin Emu and Osu it loads files called .pyd (Python dynamic module) and .dll (Dynamic Link Library)
 
 ---
 
