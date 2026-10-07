@@ -79,8 +79,9 @@ Contact me and tell me what app do you want to add, we have some rules too.
 **inf.** in this command there its going to be a window that says, this website its blocked by IT Admin, just press unblock
 
 
-**inf** If you think that you might be in problem because of this, you will not get in any problem with the IT or your school if you do this
- There is a file called IT_Email.png and it_email2.png where it explicitly answers to an email and it answers this question
+**inf.** If you think that you might be in problem because of this, you will not get in any problem with the IT or your school if you do this.
+ 
+**inf.** There is a file called IT_Email.png and it_email2.png where it explicitly answers to an email and it answers this question
 
 **post-install.** After installing, you can run Lupi store always, even if you restart, with this commands:
 > cd $env:USERPROFILE\Downloads\LupiStore-main\LupiStore-main\LupiStore
