@@ -22,9 +22,9 @@ def run_app():
          with zipfile.ZipFile(file_name, 'r') as zip_ref:
             zip_ref.extractall(path)
          os.remove("dolphin-python-windows-x64.zip")
-         subprocess.run(["py", r"apps\dolphin-python\launch.py"])
+         subprocess.run(["py", r"apps\dolphin-python\main.py"])
         else:
-         subprocess.run(["py", r"apps\dolphin-python\launch.py"])
+         subprocess.run(["py", r"apps\dolphin-python\main.py"])
         
          
     elif app_number == 2:
