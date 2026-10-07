@@ -84,6 +84,7 @@ Contact me and tell me what app do you want to add, we have some rules too.
 
 **post-install.** After installing, you can run Lupi store always, even if you restart, with this commands:
 > cd $env:USERPROFILE\Downloads\LupiStore-main\LupiStore-main\LupiStore
+
 > py main.py
 
 <div align="center">
