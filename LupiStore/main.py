@@ -121,10 +121,16 @@ def update_lupi_store():
     app.processEvents()
     link_py = "https://github.com/lupixC/LupiStore/raw/main/LupiStore/main.py"
     link_ui = "https://github.com/lupixC/LupiStore/raw/main/LupiStore/mainwindow.ui"
+    link_zip = "https://github.com/lupixC/LupiStore/releases/download/ImageSystem/images.zip"
     urllib.request.urlretrieve(link_py, "main.py.new")
     urllib.request.urlretrieve(link_ui, "mainwindow.ui.new")
+    urllib.request.urlretrieve(link_zip, "images.zip")
+    with zipfile.ZipFile("images.zip", 'r') as zip_ref:
+        zip_ref.extractall("images")
+
     widget("update").setText("Restarting LupiStore...")
     app.processEvents()
+    os.remove("images.zip")
     restart = (
             "timeout /t 1 && "
             "move /y main.py.new main.py && "
