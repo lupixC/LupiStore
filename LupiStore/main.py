@@ -84,7 +84,6 @@ for _button_name in (
     _button.setIconSize(_button_size * 0.6)
 
 
-# Optional: keep aspect ratio for image labels.
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 _pix_image = QPixmap(r"images/download.png")
@@ -116,9 +115,17 @@ def run_osu():
 def run_button_clicked():
     run_app()
 
+def update_lupi_store():
+    link_py = "https://github.com/lupixC/LupiStore/raw/main/LupiStore/main.py"
+    urllib.request.urlretrieve(link_py, "main.py")
+    link_ui = "https://github.com/lupixC/LupiStore/raw/main/LupiStore/mainwindow.ui"
+    urllib.request.urlretrieve(link_ui, "mainwindow.ui")
+    
+
 widget("dolphinButton").clicked.connect(run_dolphin)
 widget("minecraftLauncherButton").clicked.connect(run_minecraft)
 widget("osuButton").clicked.connect(run_osu)
 widget("runButton").clicked.connect(run_button_clicked)
+widget("update").clicked.connect(update_lupi_store)
 
 sys.exit(app.exec())
