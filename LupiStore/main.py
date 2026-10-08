@@ -132,7 +132,7 @@ def update_lupi_store():
             "py main.py"
               )
     subprocess.Popen(restart, shell=True)
-    ui.quit()
+    ui.close()
     
 
 widget("dolphinButton").clicked.connect(run_dolphin)
