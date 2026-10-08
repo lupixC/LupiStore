@@ -14,17 +14,17 @@ def run_app():
     global app_number
     if app_number == 1:
         if not os.path.exists("apps//dolphin-python"):
-         current_path = dirname(__file__)
-         path = os.path.join(current_path, "apps")
-         link = "https://github.com/lupixC/LupiStore/releases/download/Dolphin/dolphin-python-windows-x64.zip"
-         file_name = "dolphin-python-windows-x64.zip"
-         urllib.request.urlretrieve(link, file_name)
-         with zipfile.ZipFile(file_name, 'r') as zip_ref:
+          current_path = dirname(__file__)
+          path = os.path.join(current_path, "apps")
+          link = "https://github.com/lupixC/LupiStore/releases/download/Dolphin/dolphin-python-windows-x64.zip"
+          file_name = "dolphin-python-windows-x64.zip"
+          urllib.request.urlretrieve(link, file_name)
+          with zipfile.ZipFile(file_name, 'r') as zip_ref:
             zip_ref.extractall(path)
-         os.remove("dolphin-python-windows-x64.zip")
-         subprocess.run(["py", r"apps\dolphin-python\main.py"])
+          os.remove("dolphin-python-windows-x64.zip")
+          subprocess.run(["py", r"apps\dolphin-python\main.py"])
         else:
-         subprocess.run(["py", r"apps\dolphin-python\main.py"])
+           subprocess.run(["py", r"apps\dolphin-python\main.py"])
         
          
     elif app_number == 2:
@@ -44,17 +44,17 @@ def run_app():
     
     elif app_number == 3:
          if not os.path.exists("apps//osu-lazer-python"):
-          current_path = dirname(__file__)
-          path = os.path.join(current_path, "apps")
-          link = "https://github.com/lupixC/LupiStore/releases/download/Osu!Lazer/osu-lazer-python-windows-x64.zip"
-          file_name = "osu-lazer-python-windows-x64.zip"
-          urllib.request.urlretrieve(link, file_name)
-          with zipfile.ZipFile(file_name, 'r') as zip_ref:
+           current_path = dirname(__file__)
+           path = os.path.join(current_path, "apps")
+           link = "https://github.com/lupixC/LupiStore/releases/download/Osu!Lazer/osu-lazer-python-windows-x64.zip"
+           file_name = "osu-lazer-python-windows-x64.zip"
+           urllib.request.urlretrieve(link, file_name)
+           with zipfile.ZipFile(file_name, 'r') as zip_ref:
             zip_ref.extractall(path)
-          os.remove("osu-lazer-python-windows-x64.zip")
-          subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
+           os.remove("osu-lazer-python-windows-x64.zip")
+           subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
          else:
-          subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
+           subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
 
 
 
@@ -117,10 +117,21 @@ def run_button_clicked():
     run_app()
 
 def update_lupi_store():
+    widget("update").setText("Updating...")
+    app.processEvents()
     link_py = "https://github.com/lupixC/LupiStore/raw/main/LupiStore/main.py"
-    urllib.request.urlretrieve(link_py, "main.py")
     link_ui = "https://github.com/lupixC/LupiStore/raw/main/LupiStore/mainwindow.ui"
-    urllib.request.urlretrieve(link_ui, "mainwindow.ui")
+    urllib.request.urlretrieve(link_py, "main.py.new")
+    urllib.request.urlretrieve(link_ui, "mainwindow.ui.new")
+    widget("update").setText("Restarting LupiStore...")
+    app.processEvents()
+    restart = (
+            "timeout /t 1 && "
+            "move /y main.py.new main.py && "
+            "move /y mainwindow.ui.new mainwindow.ui && "
+            "py main.py"
+              )
+    subprocess.Popen(restart, shell=True)
     
 
 widget("dolphinButton").clicked.connect(run_dolphin)
