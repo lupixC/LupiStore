@@ -69,28 +69,14 @@ Create a comment clicking the Issues button and tell me what app do you want to 
 
 **2.** Click the Code button, then click Download Zip, then click Save; after that right click the file, select extract All and then click Extract
 
-**3.** Search the app called Terminal (not cmd) and open it, then put this:
- 
-> cd $env:USERPROFILE\Downloads\LupiStore-main\LupiStore-main\LupiStore
+**3.** Enter to the folder called LupiStore-main, then go to the folder called Setup and double click/run the file called LupiSetup
 
-**4.** Press enter
+**4.** Read the text and click Install, you need to read the text because its important to understand what this does. Is safe but still you need to read the text before clicking install
 
-> py -m pip install Pillow minecraft-launcher-lib PySide6
+**5.** Now go to the Folder called LupiStore and double click it
 
-**5.** Press enter
+**6.** now you are in LupiStore, I make updates every day so make sure to click the update button every day! (=
 
-**inf.** in this command there its going to be a window that says, this website its blocked by IT Admin, just press unblock
+**6.** Enjoy LupiStore!
 
 
-**inf.** If you think that you might be in problem because of this:
- 
-**inf.** There is a file called IT_Email.png and it_email2.png where it explicitly answers to this question. 
-
-**post-install.** After installing, you can run Lupi store always, even if you restart, with this commands:
-> cd $env:USERPROFILE\Downloads\LupiStore-main\LupiStore-main\LupiStore
-
-> py main.py
-
-<div align="center">
-
-</div>
