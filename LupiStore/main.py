@@ -22,9 +22,9 @@ def run_app():
           with zipfile.ZipFile(file_name, 'r') as zip_ref:
             zip_ref.extractall(path)
           os.remove("dolphin-python-windows-x64.zip")
-          subprocess.run(["py", r"apps\dolphin-python\main.py"])
+          subprocess.Popen(["py", r"apps\dolphin-python\main.py"])
         else:
-           subprocess.run(["py", r"apps\dolphin-python\main.py"])
+           subprocess.Popen(["py", r"apps\dolphin-python\main.py"])
         
          
     elif app_number == 2:
@@ -37,9 +37,9 @@ def run_app():
          with zipfile.ZipFile(file_name, 'r') as zip_ref:
             zip_ref.extractall(path)
          os.remove("LupiLauncher.zip")
-         subprocess.run(["py", r"apps\LupiLauncher\main.py"])
+         subprocess.Popen(["py", r"apps\LupiLauncher\main.py"])
         else:
-         subprocess.run(["py", r"apps\LupiLauncher\main.py"])
+         subprocess.Popen(["py", r"apps\LupiLauncher\main.py"])
    
     
     elif app_number == 3:
@@ -52,9 +52,9 @@ def run_app():
            with zipfile.ZipFile(file_name, 'r') as zip_ref:
             zip_ref.extractall(path)
            os.remove("osu-lazer-python-windows-x64.zip")
-           subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
+           subprocess.Popen(["py", r"apps\osu-lazer-python\main.py"])
          else:
-           subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
+           subprocess.Popen(["py", r"apps\osu-lazer-python\main.py"])
 
 
 
