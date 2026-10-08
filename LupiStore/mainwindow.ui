@@ -130,6 +130,21 @@
    <set>Qt::AlignCenter</set>
   </property>
  </widget>
+ <widget class="QPushButton" name="update">
+  <property name="geometry"><rect><x>750</x><y>40</y><width>120</width><height>38</height></rect></property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="visible">
+   <bool>true</bool>
+  </property>
+  <property name="styleSheet">
+   <string>background-color: #a19afe; color: #111111;</string>
+  </property>
+  <property name="text">
+   <string>Update</string>
+  </property>
+ </widget>
  </widget>
  <resources/>
  <connections/>
