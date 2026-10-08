@@ -67,7 +67,7 @@ Create a comment clicking the Issues button and tell me what app do you want to 
 
 **1.** Install Python in Software Center, if you want to use the minecraft launcher you need to install Open JDK
 
-**2.** Click the Code button, then click Download Zip, then click Save; after that right click the file, select extract All and then click Extract
+**2.** Click the Code button, then click Download Zip, then click Save; after that right click the file, select extract All and then click Extract (Make sure to extract the files in Downloads folder and dont change any folder from its original position!)
 
 **3.** Enter to the folder called LupiStore-main, then go to the folder called Setup and double click/run the file called LupiSetup
 
