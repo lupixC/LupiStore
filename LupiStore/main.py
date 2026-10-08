@@ -8,6 +8,7 @@ import urllib.request
 import zipfile
 from os.path import dirname
 import subprocess
+import threading
 app_number = 2
 separator = os.path.sep
 def run_app():
@@ -56,6 +57,10 @@ def run_app():
          else:
            subprocess.Popen(["pyw", r"apps\osu-lazer-python\main.py"])
 
+thread_run = threading.Thread(target=run_app)
+
+def thread_run_app():
+    thread_run.start()
 
 
 app = QApplication(sys.argv)
@@ -114,7 +119,7 @@ def run_osu():
     app_number = 3
 
 def run_button_clicked():
-    run_app()
+    thread_run_app()
 
 def update_lupi_store():
     widget("update").setText("Updating...")
