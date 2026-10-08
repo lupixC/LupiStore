@@ -24,7 +24,7 @@ LupiStore its an store for running OSS apps:
 
 ## Do you want another apps in LupiStore?
 
-Contact me and tell me what app do you want to add, we have some rules too.
+Create a comment clicking the Issues button and tell me what app do you want to add, we have some rules too.
 
 ### Rules
 
