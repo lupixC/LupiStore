@@ -44,17 +44,18 @@ def run_app():
     
     elif app_number == 3:
          if not os.path.exists("apps//osu-lazer-python"):
-         current_path = dirname(__file__)
-         path = os.path.join(current_path, "apps")
-         link = "https://github.com/lupixC/LupiStore/releases/download/Osu!Lazer/osu-lazer-python-windows-x64.zip"
-         file_name = "osu-lazer-python-windows-x64.zip"
-         urllib.request.urlretrieve(link, file_name)
-         with zipfile.ZipFile(file_name, 'r') as zip_ref:
+          current_path = dirname(__file__)
+          path = os.path.join(current_path, "apps")
+          link = "https://github.com/lupixC/LupiStore/releases/download/Osu!Lazer/osu-lazer-python-windows-x64.zip"
+          file_name = "osu-lazer-python-windows-x64.zip"
+          urllib.request.urlretrieve(link, file_name)
+          with zipfile.ZipFile(file_name, 'r') as zip_ref:
             zip_ref.extractall(path)
-         os.remove("osu-lazer-python-windows-x64.zip")
-         subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
-        else:
-         subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
+          os.remove("osu-lazer-python-windows-x64.zip")
+          subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
+         else:
+          subprocess.run(["py", r"apps\osu-lazer-python\main.py"])
+
 
 
 app = QApplication(sys.argv)
