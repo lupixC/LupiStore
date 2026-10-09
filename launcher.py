@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -8,10 +9,16 @@ import sys
 import sysconfig
 import tempfile
 import traceback
+import urllib.error
+import urllib.request
+import zipfile
 
 ROOT = Path(__file__).resolve().parent
 DEPENDENCIES = ROOT / '.deps' / sys.implementation.cache_tag
 REQUIREMENTS = ROOT / 'requirements.txt'
+DEPENDENCY_ASSET = 'LupiStore-paquetes-windows-python314.zip'
+DEPENDENCY_URL = 'https://github.com/lupixC/LupiStore/releases/download/dependencias-python314-v1/' + DEPENDENCY_ASSET
+DEPENDENCY_SHA256 = '2636b949582458dedf26e27ea8187a41fdf1f03aed30d621df7459490d3bbc73'
 
 
 def activate_dependencies():
@@ -25,7 +32,7 @@ def activate_dependencies():
 def dependencies_ready():
     try:
         marker = json.loads((DEPENDENCIES / '.ready.json').read_text())
-        return marker['requirements'] == REQUIREMENTS.read_text() and (DEPENDENCIES / 'pylnk3.py').is_file() and all(
+        return marker['requirements'] == REQUIREMENTS.read_text() and all(
             (DEPENDENCIES / name).is_dir()
             for name in ('PySide6', 'PIL', 'minecraft_launcher_lib')
         )
@@ -33,13 +40,67 @@ def dependencies_ready():
         return False
 
 
+def dependency_archive(progress):
+    cache = ROOT / '.cache'
+    cache.mkdir(exist_ok=True)
+    destination = cache / DEPENDENCY_ASSET
+    if destination.is_file():
+        with destination.open('rb') as existing:
+            if hashlib.file_digest(existing, 'sha256').hexdigest() == DEPENDENCY_SHA256:
+                progress('Using downloaded packages')
+                return destination
+        destination.unlink()
+    progress('Downloading Windows Python 3.14 packages…')
+    request = urllib.request.Request(DEPENDENCY_URL, headers={'User-Agent': 'LupiStore'})
+    with tempfile.TemporaryDirectory(prefix='.download-', dir=cache) as temporary:
+        pending = Path(temporary) / DEPENDENCY_ASSET
+        digest = hashlib.sha256()
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response, pending.open('wb') as output:
+                total = int(response.headers.get('Content-Length', 0))
+                received = 0
+                while chunk := response.read(1024 * 1024):
+                    output.write(chunk)
+                    digest.update(chunk)
+                    received += len(chunk)
+                    progress(f'Downloading packages: {received // (1024 * 1024)} MB' +
+                             (f' / {total // (1024 * 1024)} MB' if total else ''))
+        except urllib.error.HTTPError as error:
+            if error.code == 404:
+                raise RuntimeError('The dependency release is not available. Publish dependencias-python314-v1 '
+                                   f'with {DEPENDENCY_ASSET} on GitHub first.') from error
+            raise
+        if digest.hexdigest() != DEPENDENCY_SHA256:
+            raise RuntimeError('The downloaded package ZIP failed verification. Please retry setup.')
+        os.replace(pending, destination)
+    return destination
+
+
 def install_dependencies(progress):
+    if sys.version_info[:2] != (3, 14) or sysconfig.get_platform() != 'win-amd64':
+        raise RuntimeError('These packages require regular 64-bit Python 3.14 for Windows.')
+    if sysconfig.get_config_var('Py_GIL_DISABLED'):
+        raise RuntimeError('These packages require regular Python 3.14, not a free-threaded build.')
+    archive_path = dependency_archive(progress)
     DEPENDENCIES.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='.install-', dir=DEPENDENCIES.parent) as temporary:
         stage = Path(temporary) / 'libraries'
-        command = [sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check',
+        wheels = Path(temporary) / 'wheels'
+        wheels.mkdir()
+        progress('Preparing downloaded packages…')
+        with zipfile.ZipFile(archive_path) as archive:
+            for member in archive.infolist():
+                name = member.filename
+                if not name.endswith('.whl'):
+                    continue
+                if Path(name).name != name or '\\' in name or ':' in name:
+                    raise RuntimeError('Invalid package path in the dependency ZIP.')
+                with archive.open(member) as source, (wheels / name).open('wb') as output:
+                    shutil.copyfileobj(source, output)
+        progress('Installing local packages…')
+        command = [sys.executable, '-m', 'pip', '--isolated', 'install', '--disable-pip-version-check',
                    '--no-warn-script-location', '--only-binary=:all:', '--target', str(stage),
-                   '--cache-dir', str(ROOT / '.cache' / 'pip'), '-r', str(REQUIREMENTS)]
+                   '--no-index', '--find-links', str(wheels), '--no-compile', '-r', str(REQUIREMENTS)]
         flags = subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
         with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                               text=True, encoding='utf-8', errors='replace', creationflags=flags) as process:
@@ -51,7 +112,9 @@ def install_dependencies(progress):
                 log = ROOT / 'logs' / 'setup.log'
                 log.parent.mkdir(exist_ok=True)
                 log.write_text(''.join(output), encoding='utf-8')
-                raise RuntimeError(f'Could not install dependencies. Check your connection and {log}.')
+                raise RuntimeError(f'Could not install dependencies. See {log}.')
+        if not all((stage / name).is_dir() for name in ('PySide6', 'PIL', 'minecraft_launcher_lib')):
+            raise RuntimeError('Package installation did not produce the required libraries.')
         (stage / '.ready.json').write_text(json.dumps({'requirements': REQUIREMENTS.read_text()}))
         backup = DEPENDENCIES.with_name(DEPENDENCIES.name + '.previous')
         if backup.exists():
