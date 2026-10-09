@@ -1,0 +1,4 @@
+PySide6-Essentials==6.11.2
+Pillow==12.3.0
+minecraft-launcher-lib==8.0
+pylnk3==0.4.3
