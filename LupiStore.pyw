@@ -1,3 +1,3 @@
-from launcher import main
+from setup import main
 
 main()
