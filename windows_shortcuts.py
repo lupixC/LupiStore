@@ -33,7 +33,7 @@ def create_desktop_shortcut():
     desktop = desktop_directory()
     desktop.mkdir(parents=True, exist_ok=True)
     links = [(desktop / 'LupiStore.lnk', 'LupiStore.pyw', 'LupiStore'),
-             (ROOT / 'Abrir LupiStore.lnk', 'LupiStore.pyw', 'LupiStore'),
+             (ROOT / 'Open LupiStore.lnk', 'LupiStore.pyw', 'LupiStore'),
              (ROOT / 'Setup.lnk', 'LupiSetup.pyw', 'LupiStore Setup')]
     for target, script, description in links:
         pending = target.with_name(target.stem + '.pending.lnk')
